@@ -1,0 +1,49 @@
+<div class="modal fade" id="product-modal" tabindex="-1" role="dialog" aria-labelledby="billLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="header-text">
+          <h4>รายการสินค้า</h4>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form class="form-inline">
+          <input type="text" class="form-control" id="search" placeholder="ค้นหาสินค้า">
+          <button type="submit" class="btn btn-default" ng-click="search()"><i class="fa fa-search"></i> ค้นหา</button>
+        </form>
+        <br>
+        <table class="table table-hover" id="list-table">
+          <thead>
+          <tr>
+            <th width="15%">รหัส</th>
+            <th width="35%">ชื่อ</th>
+            <th width="20%">ประเภท</th>
+            <th width="15%">ราคาขาย</th>
+            <th width="15%"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="p in products">
+            <td>@{p.id}</td>
+            <td>@{p.product_name}</td>
+            <td>@{p.category.category_name}</td>
+            <td align="right">@{p.sale_price|number:2}</td>
+            <td align="right">
+              <a href="#" ng-click="selecProduct($index)">เพิ่ม</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <br>
+        <div paginate="results" class="pull-right"></div>
+        <span>แสดงผล @{pageCount} จาก @{total} รายการ</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>

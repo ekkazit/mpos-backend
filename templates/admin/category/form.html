@@ -1,0 +1,74 @@
+{% extends "master/admin.html" %}
+
+{% block page %}
+  <div class="page-title">
+    {% if id %}
+      <h3 class="page-title">แก้ไขประเภทสินค้า</h3>
+    {% else %}
+      <h3 class="page-title">เพิ่มประเภทสินค้า</h3>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block breadcrumb %}
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('admin.category') }}">ประเภทสินค้า</a></li>
+    <li class="active">
+      {% if category %}
+        แก้ไขประเภทสินค้า "{{ category.category_name }}"
+      {% else %}
+        เพิ่มประเภทสินค้าใหม่
+      {% endif %}
+    </li>
+  </ol>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">ข้อมูลประเภทสินค้า</h4>
+        </div>
+        <div class="panel-body">
+          <div class="col-md-12">
+            <form id="forms" enctype="multipart/form-data" action="/api/category/save" method="post" data-parsley-validate>
+              <table class="table" id="form-table">
+                <tr>
+                  <td><label for="id">รหัส</label></td>
+                  <td><input type="text" class="form-control form-code" id="id" name="id" value="{{ id }}" readonly>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="category_name">ประเภทสินค้า</label> <span class="required">*</span>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control" id="category_name" name="category_name" ng-model="category.category_name" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="parent_id">ประเภทสินค้าหลัก</label>
+                  </td>
+                  <td>
+                    <select class="form-control" id="parent_id" name="parent_id" ng-model="parent" ng-options="c.category_name for c in categories track by c.id">
+                      <option value="">- เลือก -</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="pull-right">
+            <a href="#" class="btn btn-primary" ng-click="submit()"><i class="fa-floppy"></i> บันทึก</a>
+            <a href="{{ url_for('admin.category') }}" class="btn btn-default">ยกเลิก</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/static/app/category/form.js"></script>
+{% endblock %}

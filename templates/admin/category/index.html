@@ -1,0 +1,71 @@
+{% extends "master/admin.html" %}
+
+{% block page %}
+  <div class="page-title">
+    <h3>ประเภทสินค้า</h3>
+  </div>
+{% endblock %}
+
+{% block breadcrumb %}
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('admin.category') }}">ประเภทสินค้า</a></li>
+    <li class="active">รายการ</li>
+  </ol>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a href="/admin/category/form" class="btn btn-default"><i class="fa fa-plus"></i> เพิ่มรายการ</a>
+          <a href="#" class="btn btn-default" ng-disabled="!selected.length" ng-click="deleteAll()"><i class="fa-trash-empty"></i> ลบรายการ</a>
+          <form class="form-inline pull-right">
+            <div class="input-group">
+              <input type="text" class="form-control" id="search" placeholder="ค้นหา" style="width:200px">
+              <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" ng-click="search()"><i class="fa-search"></i></button>
+            </span>
+            </div>
+          </form>
+        </div>
+        <div class="panel-alt">
+          <table class="table table-bordered" id="list-table">
+            <thead>
+            <tr>
+              <th width="5%"><input type="checkbox" ng-click="selectAll($event)" ng-checked="isSelectedAll()"/></th>
+              <th width="5%" sorted="id">รหัส</th>
+              <th sorted="category_name">ประเภทสินค้า</th>
+              <th>ประเภทหลัก</th>
+              <th width="5%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="p in categories">
+              <td><input type="checkbox" name="selected" ng-checked="isSelected(p.id)" ng-click="updateSelection($event, p.id)"/></td>
+              <td>@{p.id}</td>
+              <td>@{p.category_name}</td>
+              <td>@{p.parent_name}</td>
+              <td><a href="#" ng-click="view(p.id)">แก้ไข</a></td>
+            </tr>
+            </tbody>
+            <tfoot ng-if="categories.length == 0">
+            <tr>
+              <td colspan="10">** ไม่พบประเภทสินค้า **</td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="panel-footer" ng-if="categories.length">
+          <div paginate="results" class="pull-right"></div>
+          <div class="list-result">
+            <span>แสดงผล @{pageCount} จาก @{total} รายการ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/static/app/pagination.js"></script>
+  <script type="text/javascript" src="/static/app/sorted.js"></script>
+  <script type="text/javascript" src="/static/app/category/index.js"></script>
+{% endblock %}

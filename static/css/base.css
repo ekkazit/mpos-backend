@@ -1,0 +1,55 @@
+h1,h2,h3,h4,h5,ul,li,hr,p,form {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar {
+  margin: 0;
+}
+
+.alert {
+  text-align: center;
+}
+
+.panel-center {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  margin-left: -175px;
+}
+
+.panel-center .panel-title {
+  font-size: 20px;
+}
+
+.panel-login {
+  width: 350px;
+}
+
+.panel-login .panel-body {
+  padding: 20px;
+}
+
+.panel-login .form-control {
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.panel-login label {
+  text-align: left;
+}
+
+.panel-login .btn {
+  height: 40px;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.panel-login .center {
+  text-align: center;
+}

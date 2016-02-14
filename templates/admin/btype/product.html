@@ -1,0 +1,78 @@
+{% extends "master/admin.html" %}
+
+{% block page %}
+  <div class="page-title">
+    <h3>กำหนดราคาสินค้า</h3>
+  </div>
+{% endblock %}
+
+{% block breadcrumb %}
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('admin.btype') }}">กลุ่มสาขา</a></li>
+    <li class="active">
+      {% if branch_type %}
+        กำหนดราคาสินค้าของกลุ่ม "{{ branch_type.branch_type_name }}"
+      {% endif %}
+    </li>
+  </ol>
+{% endblock %}
+
+
+{% block content %}
+  {% include "admin/btype/partial/modals.html" %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="form-inline">
+            <label>สินค้า :</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="product" placeholder="เลือกสินค้า" style="width:200px">
+              <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" ng-click="openProduct()"><i class="fa-ellipsis"></i>
+              </button>
+            </span>
+            </div>
+            <label style="margin-left:15px">ราคาขาย :</label>
+            <input type="text" class="form-control form-number" id="sale_price">
+            <label style="margin-left:15px">ราคาทุน :</label>
+            <input type="text" class="form-control form-number" id="cost_price">
+            <a href="#" class="btn btn-default" ng-click="addItem()"><i class="fa-plus"></i> เพิ่มรายการ</a>
+            <a href="#" class="btn btn-default" ng-click="clearProduct()">ยกเลิก</a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <form id="forms" enctype="multipart/form-data" action="/api/branchtype/formsave" method="post" data-parsley-validate>
+            <input type="hidden" id="product_items" name="product_items">
+            <input type="hidden" class="form-control form-code" id="id" name="id" value="{{ id }}">
+            <table class="table table-bordered" id="list-form">
+              <thead>
+              <tr>
+                <th width="40%">ชื่อสินค้า</th>
+                <th width="20%">ราคาขาย</th>
+                <th width="20%">ราคาทุน</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="p in product_items">
+                <td>@{p.name}</td>
+                <td><input type="text" class="form-control form-number" ng-model="p.price" style="width: 150px"></td>
+                <td><input type="text" class="form-control form-number" ng-model="p.cost" style="width: 150px"></td>
+                <td><a href="#" ng-click="deleteItem($index)">ลบ</a></td>
+              </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+        <div class="panel-footer">
+          <div class="pull-right">
+            <a href="#" class="btn btn-primary" ng-click="submit()"><i class="fa-floppy"></i> บันทึก</a>
+            <a href="{{ url_for('admin.btype') }}" class="btn btn-default">ยกเลิก</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/static/app/btype/product.js"></script>
+{% endblock %}

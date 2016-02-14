@@ -1,0 +1,81 @@
+{% extends "master/admin.html" %}
+
+{% block page %}
+  <div class="page-title">
+    <h3>สินค้า</h3>
+  </div>
+{% endblock %}
+
+{% block breadcrumb %}
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('admin.product') }}">สินค้า</a></li>
+    <li class="active">รายการสินค้า</li>
+  </ol>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a href="/admin/product/form" class="btn btn-default"><i class="fa fa-plus"></i> เพิ่มรายการ</a>
+          <a href="#" class="btn btn-default" ng-disabled="!selected.length" ng-click="deleteAll()"><i class="fa-trash-empty"></i> ลบรายการ</a>
+          <form class="form-inline pull-right">
+            <div class="input-group">
+              <input type="text" class="form-control" id="search" placeholder="ค้นหา" style="width:200px">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="submit" ng-click="search()"><i class="fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+        </div>
+        <div class="panel-alt">
+          <table class="table table-bordered" id="list-table">
+            <thead>
+            <tr>
+              <th width="5%"><input type="checkbox" ng-click="selectAll($event)" ng-checked="isSelectedAll()"/></th>
+              <th sorted="id" width="5%">รหัส</th>
+              <th sorted="product_name" width="25%">ชื่อสินค้า</th>
+              <th sorted="cat_id" width="15%">ประเภท</th>
+              <th sorted="subcat_id" width="15%">ประเภทย่อย</th>
+              <th sorted="sale_price" width="10%">ราคาขาย</th>
+              <th sorted="cost" width="10%">ราคาทุน</th>
+              <th>รูปภาพ</th>
+              <th width="5%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="p in products">
+              <td>
+                <input type="checkbox" name="selected" ng-checked="isSelected(p.id)" ng-click="updateSelection($event, p.id)"/>
+              </td>
+              <td>@{p.id}</td>
+              <td>@{p.product_name}</td>
+              <td>@{p.category.category_name}</td>
+              <td>@{p.sub.category_name}</td>
+              <td class="price">@{p.sale_price|number:2}</td>
+              <td class="price">@{p.cost|number:2}</td>
+              <td><img ng-src="@{p.img_path}"></td>
+              <td><a href="#" ng-click="view(p.id)">แก้ไข</a></td>
+            </tr>
+            </tbody>
+            <tfoot ng-if="products.length == 0">
+            <tr>
+              <td colspan="10">** ไม่พบรายการสินค้า **</td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="panel-footer" ng-if="products.length">
+          <div paginate="results" class="pull-right"></div>
+          <div class="list-result">
+            <span>แสดงผล @{pageCount} จาก @{total} รายการ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/static/app/pagination.js"></script>
+  <script type="text/javascript" src="/static/app/sorted.js"></script>
+  <script type="text/javascript" src="/static/app/product/index.js"></script>
+{% endblock %}

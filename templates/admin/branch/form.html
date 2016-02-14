@@ -1,0 +1,75 @@
+{% extends "master/admin.html" %}
+
+{% block page %}
+  <div class="page-title">
+    {% if id %}
+      <h3 class="page-title">แก้ไขสาขา</h3>
+    {% else %}
+      <h3 class="page-title">เพิ่มสาขา</h3>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block breadcrumb %}
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('admin.branch') }}">สาขา</a></li>
+    <li class="active">
+      {% if branch %}
+        แก้ไขสาขา "{{ branch.branch_name }}"
+      {% else %}
+        เพิ่มสาขาใหม่
+      {% endif %}
+    </li>
+  </ol>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">ข้อมูลสาขา</h4>
+        </div>
+        <div class="panel-body">
+          <div class="col-md-12">
+            <form id="forms" enctype="multipart/form-data" action="/api/branch/save" method="post" data-parsley-validate>
+              <input type="hidden" id="img" name="img"> <input type="hidden" id="img_path" name="img_path">
+              <table class="table" id="form-table">
+                <tr>
+                  <td><label for="id">รหัส</label></td>
+                  <td><input type="text" class="form-control form-code" id="id" name="id" value="{{ id }}" readonly>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="name">ชื่อสาขา</label> <span class="required">*</span>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control" id="branch_name" name="branch_name" ng-model="branch.branch_name" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="branch_type_id">กลุ่มสาขา</label>
+                  </td>
+                  <td>
+                    <select class="form-control" id="branch_type_id" name="branch_type_id" ng-model="branchtype" ng-options="c.branch_type_name for c in branch_types track by c.id">
+                      <option value="">- เลือก -</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="pull-right">
+            <a href="#" class="btn btn-primary" ng-click="submit()"><i class="fa-floppy"></i> บันทึก</a>
+            <a href="{{ url_for('admin.branch') }}" class="btn btn-default">ยกเลิก</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/static/app/branch/form.js"></script>
+{% endblock %}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}MPOS - Administration{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/vendor/fontello/css/fontello.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/font.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/admin.css">
+  <script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="/static/js/angular/angular.min.js"></script>
+  <script type="text/javascript" src="/static/vendor/jquery-form/jquery.form.min.js"></script>
+  <script type="text/javascript" src="/static/vendor/parsley/parsley.min.js"></script>
+  <script type="text/javascript" src="/static/vendor/notifyjs/notify.min.js"></script>
+</head>
+<body ng-app="app" ng-controller="ctrl" id="ctrl" ng-cloak>
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand">MPOS</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{{ url_for('auth.logout') }}">ออกจากระบบ</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li><a href="{{ url_for('admin.product') }}">สินค้า</a></li>
+        <li><a href="{{ url_for('admin.category') }}">ประเภทสินค้า</a></li>
+        <li><a href="{{ url_for('admin.btype') }}">กลุ่มสาขา</a></li>
+        <li><a href="{{ url_for('admin.branch') }}">สาขา</a></li>
+        <li><a href="{{ url_for('admin.member') }}">สมาชิก</a></li>
+        <li><a href="{{ url_for('admin.users') }}">ผู้ใช้</a></li>
+        <li class="dropdown">
+          <a href="#" data-toggle="dropdown" role="button">รายงาน <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">รายงานยอดขาย</a></li>
+            <li><a href="#">รายงานวัตถุดิบ</a></li>
+            <li><a href="#">รายงานสินค้าขายดี</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">รายงานพนักงาน</a></li>
+          </ul>
+        </li>
+        <li><a href="{{ url_for('admin.synchronize') }}">ปรับปรุง script</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      {% block page %}{% endblock %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      {% block breadcrumb %}{% endblock %}
+    </div>
+  </div>
+  {% block content %}{% endblock %}
+</div>
+<script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+  function setNavigation() {
+    var path = window.location.pathname;
+    path = path.replace(/\/$/, '');
+    path = decodeURIComponent(path);
+    $('.nav a').each(function () {
+      var href = $(this).attr('href');
+      if (path.substring(0, href.length) === href) {
+        $(this).closest('li').addClass('active');
+        $(this).closest('.report').addClass('active');
+      }
+    });
+  }
+  $(function () {
+    setNavigation()
+  });
+</script>
+</body>
+</html>

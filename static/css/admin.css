@@ -1,0 +1,187 @@
+h1,h2,h3,h4,h5,ul,li,hr,p,form {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.form-control {
+  box-shadow: none;
+}
+
+.ng-cloak, .x-ng-cloak, .ng-hide {
+  display: none !important;
+}
+
+[class^="fa-"]:before, [class*=" fa-"]:before {
+  margin: 0;
+}
+
+.breadcrumb {
+  padding-left: 0;
+  background-color: #fff;
+}
+
+.page-title {
+  overflow: hidden;
+}
+
+.page-title h3 {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/**/
+.panel {}
+
+.panel-footer {
+  overflow: hidden;
+}
+
+/**/
+.parsley-errors-list {
+  opacity: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.parsley-errors-list.filled {
+  opacity: 1;
+}
+
+.parsley-required, .parsley-type {
+  color: red;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/**/
+#list-table {
+  margin: 0;
+  border: none;
+}
+
+#list-table img {
+  width: 32px;
+  height: 32px;
+}
+
+#list-table .price {
+  text-align: right;
+}
+
+#list-table thead tr th {
+  font-size: 13px;
+  text-transform: uppercase;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ddd;
+}
+
+#list-table thead tr th:first-child,
+#list-table tbody tr td:first-child {
+  border-left: none;
+  padding-left: 15px;
+}
+
+#list-table thead tr th:last-child,
+#list-table tbody tr td:last-child {
+  border-right: none;
+  padding-right: 15px;
+}
+
+#list-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+#list-table tbody tr td {
+  vertical-align: middle;
+}
+
+/**/
+#form-table {
+  margin: 0;
+}
+
+#form-table .form-code {
+  width: 160px;
+}
+
+#form-table .form-number {
+  width: 160px;
+  text-align: right;
+}
+
+#form-table .required {
+  color: red;
+}
+
+#form-table tr td {
+  border: none;
+  vertical-align: middle;
+}
+
+#form-table tr td:first-child {
+  width: 20%;
+  padding-right: 20px;
+}
+
+/**/
+#list-form {
+  margin: 0;
+}
+
+#list-form tr td {
+  vertical-align: middle;
+}
+
+/**/
+.pagination {
+  margin: 0;
+}
+
+.pagination li a {
+  padding: 0px 6px;
+  margin-left: 5px;
+  border: none;
+  background-color: #f7f7f7;
+  border-radius: 2px;
+}
+
+.pagination li:first-child a,
+.pagination li:last-child a {
+  border-radius: 2px;
+}
+
+/**/
+.imgholder {
+  float: right;
+  margin: 10px 0;
+}
+
+.imgholder img {
+  width: 160px;
+  height: 160px;
+  text-align: right;
+}
+
+.imgholder .img-inner {
+  width: 160px;
+  height: 160px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #f7f7f7;
+  font-size: 16px;
+  font-weight: bold;
+  color: #999;
+}
+
+.form-number {
+  width: 100px !important;
+  text-align: right;
+}

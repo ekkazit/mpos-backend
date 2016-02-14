@@ -1,0 +1,13 @@
+{% extends "master/admin.html" %}
+
+{% block content %}
+  <script type="text/javascript">
+    var app = angular.module('app', []);
+    app.config(function ($interpolateProvider, $compileProvider) {
+      $compileProvider.debugInfoEnabled(false);
+      $interpolateProvider.startSymbol('@{').endSymbol('}');
+    });
+    app.controller('ctrl', function ($scope) {
+    });
+  </script>
+{% endblock %}

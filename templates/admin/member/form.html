@@ -1,0 +1,110 @@
+{% extends "master/admin.html" %}
+
+{% block page %}
+  <div class="page-title">
+    {% if id %}
+      <h3 class="page-title">แก้ไขสมาชิก</h3>
+    {% else %}
+      <h3 class="page-title">เพิ่มสมาชิก</h3>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block breadcrumb %}
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('admin.member') }}">สมาชิก</a></li>
+    <li class="active">
+      {% if user %}
+        แก้ไขสมาชิก "{{ member.member_name }}"
+      {% else %}
+        เพิ่มสมาชิกใหม่
+      {% endif %}
+    </li>
+  </ol>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">ข้อมูลสมาชิก</h4>
+        </div>
+        <div class="panel-body">
+          <div class="col-md-12">
+            <form id="forms" enctype="multipart/form-data" action="/api/member/save" method="post" data-parsley-validate>
+              <input type="hidden" id="img" name="img"> <input type="hidden" id="img_path" name="img_path">
+              <table class="table" id="form-table">
+                <tr>
+                  <td><label for="id">รหัส</label></td>
+                  <td><input type="text" class="form-control form-code" id="id" name="id" value="{{ id }}" readonly>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="branch_id">สาขา</label> <span class="required">*</span>
+                  </td>
+                  <td>
+                    <select class="form-control" id="branch_id" name="branch_id" ng-model="branch" ng-options="c.branch_name for c in branches track by c.id" required>
+                      <option value="">- เลือก -</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label for="member_id">หมายเลขสมาชิก</label> <span class="required">*</span></td>
+                  <td>
+                    <input type="text" class="form-control form-code" id="member_id" name="member_id" ng-model="member.member_id" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="member_name">ชื่อสมาชิก</label> <span class="required">*</span>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control" id="member_name" name="member_name" ng-model="member.member_name" required>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="gender">เพศ</label>
+                  </td>
+                  <td>
+                    <input type="radio" id="na" name="gender" value="" checked>
+                    <label for="na" style="margin: 0 10px 0 5px">ไม่ระบุ</label>
+                    <input type="radio" id="male" name="gender" value="M">
+                    <label for="male" style="margin: 0 10px 0 5px">ชาย</label>
+                    <input type="radio" id="female" name="gender" value="F">
+                    <label for="female" style="margin: 0 10px 0 5px">หญิง</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="email">อีเมล์</label>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control" id="email" name="email" ng-model="member.email">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="tel">เบอร์โทรศัพท์</label>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control form-code" id="tel" name="tel" ng-model="member.tel">
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="pull-right">
+            <a href="#" class="btn btn-primary" ng-click="submit()"><i class="fa-floppy"></i> บันทึก</a>
+            <a href="{{ url_for('admin.member') }}" class="btn btn-default">ยกเลิก</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/static/app/member/form.js"></script>
+{% endblock %}
