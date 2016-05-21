@@ -1,4 +1,4 @@
-1. สร้าง virtual environment
+1. Create new virtual environment
 $  mkdir c:\startup
 $  cd c:\startup
 $  virtualenv envs
@@ -6,26 +6,26 @@ $  virtualenv envs
 $  cd c:\startup\envs
 $  Script\activate
 
-* ถ้าเป็น Ubuntu จะใช้ source bin\activate
+* If Ubuntu we will create by using command: source bin\activate
 
-2. ติดตั้ง Flask Libraries
+2. Install Flask Libraries
 (envs)$  pip install -r requirements.txt
 
-3. ดึง source code ออกมาจาก github
+3. Pull the source code from GitHub
 (envs)$  mkdir c:\startup\envs\mpos
 (envs)$  git init
 (envs)$  git remote add origin https://github.com/ekkazit/mpos-backend.git
 (envs)$  git pull origin master
 
-4. สร้างเทเบิ้ลด้วยคำสั่ง
+4. Create table migration by using command
 (envs)$  python manage.py migrate
 
-5. สร้างข้อมูลจำลองด้วยคำสั่ง
+5. Prepopulate data
 (envs)$  python manage.py seed
 
-6. จากนั้นสั่งให้โปรแกรมเว็บทำงาน
+6.Run server
 (envs)$  python manage.py runserver
 
-7. เข้าใช้งานด้วยยูอาร์แอล http://localhost:5000/
+7. Open the browser with http://localhost:5000/
 username: admin
 password: admin
